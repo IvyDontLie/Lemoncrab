@@ -33,11 +33,8 @@ forever(function () {
     }
 })
 forever(function () {
-    if (info.score() == 100) {
-        game.gameOver(true)
-        game.setGameOverMessage(true, "GAME WON!")
-        game.setGameOverEffect(true, effects.confetti)
-        game.reset()
+    if (true) {
+        myEnemy.follow(mySprite, 50)
     }
 })
 forever(function () {
@@ -126,13 +123,16 @@ forever(function () {
     }
 })
 forever(function () {
-    if (mySprite.overlapsWith(mySprite2)) {
-        info.changeScoreBy(1)
-        mySprite2.setPosition(randint(0, 142), randint(0, 113))
+    if (info.score() == 100) {
+        game.gameOver(true)
+        game.setGameOverMessage(true, "GAME WON!")
+        game.setGameOverEffect(true, effects.confetti)
+        game.reset()
     }
 })
 forever(function () {
-    if (true) {
-        myEnemy.follow(mySprite, 50)
+    if (mySprite.overlapsWith(mySprite2)) {
+        info.changeScoreBy(1)
+        mySprite2.setPosition(randint(0, 142), randint(0, 113))
     }
 })
