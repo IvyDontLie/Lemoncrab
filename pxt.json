@@ -1,8 +1,9 @@
 {
-    "name": "Lemoncrab",
+    "name": "Lemoncrab V.1.2",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "animation": "*"
     },
     "files": [
         "main.blocks",

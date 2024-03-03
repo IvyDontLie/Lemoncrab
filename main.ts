@@ -1,3 +1,8 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping
+}
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     game.splash("Welcome to Lemoncrab! Move using the buttons. The enemy will chase you! collect as many lemons as possible until you get 100! Click B at any time to see this again")
 })
@@ -33,6 +38,91 @@ forever(function () {
         game.setGameOverMessage(true, "GAME WON!")
         game.setGameOverEffect(true, effects.confetti)
         game.reset()
+    }
+})
+forever(function () {
+    if (controller.player1.isPressed(ControllerButton.Left)) {
+        animation.runImageAnimation(
+        mySprite,
+        assets.animation`walkright`,
+        100,
+        true
+        )
+    } else {
+        animation.runImageAnimation(
+        mySprite,
+        [img`
+            . . . c c . . . . . . . . . . . 
+            . . c 3 6 c c c c . . . . . . . 
+            . . c 6 3 3 3 3 6 c . . . . . . 
+            . c 3 3 3 3 3 c c 6 c . c c . . 
+            c 3 3 3 3 3 c 5 5 c 6 c 5 5 b . 
+            c 3 3 3 3 3 f f 5 c 6 c 5 f f . 
+            c c 3 3 3 6 f f 5 c 6 c 5 f f . 
+            c c 6 6 6 6 c 5 5 3 c 3 5 5 b . 
+            c 3 3 3 3 3 3 c 5 5 3 5 5 b . . 
+            c 3 3 3 3 3 c c b 5 5 5 5 c . . 
+            . c 3 3 3 c 5 5 b 4 5 5 4 c . . 
+            . . b b b c c 5 b b 4 4 b 5 c . 
+            . b 5 4 4 4 c 4 5 5 5 b 4 4 c . 
+            . c 5 c 4 4 4 c 5 5 5 c 4 5 c . 
+            . c c c 4 4 4 c 5 5 5 5 c 5 c . 
+            . . . . . . . c c c c c c c . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . c c . . . . . . . . . . 
+            . . . c 3 6 c c c c . . . . . . 
+            . . . c 6 3 3 3 6 6 c . . . . . 
+            . . c 3 3 3 3 3 3 6 6 c . . . . 
+            . c 3 3 3 3 3 3 c c 6 6 c c c b 
+            . c 3 3 3 3 3 c 5 5 c 6 c 5 5 b 
+            . c c 3 3 3 6 f f 5 c 6 c 5 f f 
+            . c c 6 6 6 6 f f 5 c c c 5 f f 
+            . c 3 3 3 3 3 3 c 5 5 3 5 5 b . 
+            . c 3 3 3 3 c c c 4 5 5 5 5 c . 
+            . . c 3 3 c 5 5 b 4 4 5 5 4 c . 
+            . . . c b b c 5 b b 4 4 b 5 c . 
+            . . . c 5 c c 5 5 5 c 4 5 c c . 
+            . . . c c c c 5 5 5 5 c c . . . 
+            . . . . . . c c c c c c . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . c c . . . . . . . . . . . 
+            . . c 3 6 c c c c . . . . . . . 
+            . . c 6 3 3 3 6 6 c . . . . . . 
+            . c 3 3 3 3 3 3 6 6 c . . . . . 
+            c 3 3 3 3 3 3 c c 6 6 c c c b . 
+            c 3 3 3 3 3 c 5 5 c 6 c 5 5 b . 
+            c c 3 3 3 6 f f 5 c 6 c 5 f f . 
+            c c 6 6 6 6 f f 5 c c c 5 f f . 
+            c 3 3 3 3 c c c 5 5 3 5 5 b . . 
+            c 3 3 3 c 5 5 b 5 5 5 5 5 c . . 
+            . c 3 3 c 5 b b 4 4 5 5 4 4 c . 
+            . . c b 5 5 5 b 4 4 4 b 5 5 c . 
+            . . b c 5 5 5 c 4 4 4 5 5 5 c . 
+            . . c c 5 5 5 5 c 4 c c c c . . 
+            . . c c c c c c c c c c . . . . 
+            `,img`
+            . . . c c . . . . . . . . . . . 
+            . . c 3 6 c c c c . . . . . . . 
+            . . c 6 3 3 3 3 6 c . . . . . . 
+            . c 3 3 3 3 3 c c 6 c . c c . . 
+            c 3 3 3 3 3 c 5 5 c 6 c 5 5 b . 
+            c 3 3 3 3 3 f f 5 c 6 c 5 f f . 
+            c c 3 3 3 6 f f 5 c 6 c 5 f f . 
+            c c 6 6 6 6 c 5 5 3 c 3 5 5 b . 
+            c 3 3 3 3 3 3 c 5 5 3 5 5 b . . 
+            c 3 3 3 3 3 c c 4 5 5 5 5 c c . 
+            . c 3 3 3 c 5 5 c 4 5 5 4 5 5 c 
+            . . c c b 5 5 5 c 4 4 4 b 4 5 b 
+            . . b b c 5 5 5 c 4 4 b 5 5 4 c 
+            . b 5 c c 5 5 5 5 c 4 c 5 5 5 c 
+            . c 5 c c c c c c 4 c 5 5 5 5 c 
+            . c c c . . . . . c c c c c c . 
+            `],
+        100,
+        true
+        )
     }
 })
 forever(function () {
